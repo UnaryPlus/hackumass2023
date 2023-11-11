@@ -30,5 +30,10 @@ def comment(dc_name, user_id, rating, text):
     collection = db[dc_name + "_comments"]
     result = collection.insert_one(new_document)
 
+def new_user(username, email):
+    new_document = {"username": username, "email": email, "total_ratings": 0, "total_comments": 0, "friends":[],"friend_requests":[]}
+    collection = db["users"]
+    result = collection.insert_one(new_document)
+
 if __name__ == "__main__":
     app.run(debug=True)   
