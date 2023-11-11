@@ -1,8 +1,10 @@
-{% macro stars(x) %}
-  <span class="fa fa-star"></span>
-  {% for n in range(1, 5) %}
-    <span class="fa {% if x >= n + 0.75 %} fa-star {% elif x >= n + 0.25 %} fa-star-half-o {% else %} fa-star-o {% endif %}"></span>
-  {% endfor %}
+{% macro stars(x, size) %}
+  <span class="{{ size }}">
+    <span class="fa fa-star"></span>
+    {% for n in range(1, 5) %}
+      <span class="fa {% if x >= n + 0.75 %} fa-star {% elif x >= n + 0.25 %} fa-star-half-o {% else %} fa-star-o {% endif %}"></span>
+    {% endfor %}
+  </span>
 {% endmacro %}
 
 <!DOCTYPE html>
@@ -17,9 +19,7 @@
   <div id="titlebar">
     <h1>App Title</h1>
   </div>
-  <main>
-    {% block main %}{% endblock %}
-  </main>
+  {% block main %}{% endblock %}
 </div>
 </body>
 </html>

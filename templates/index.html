@@ -5,10 +5,18 @@
 {% endblock %}
 
 {% block main %}
-  {% for dc in dcs %}
-    <a class="dclink" href="/dc/{{ dc['name'] }}">
-      <h2>{{ dc["name"] | title }}</h2>
-      {{ stars(dc["avg_stars"]) }}
-    </a>
-  {% endfor %}
+  <div id="dclist-container">
+    <table id="dclist">
+      {% for dc in dcs %}
+        <tr class="dcbar">
+          <td class="dcname">
+            <h2>{{ dc["name"] | title }}</h2>
+          </td>
+          <td>
+            {{ stars(dc["avg_stars"], "stars-large") }}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
 {% endblock %}

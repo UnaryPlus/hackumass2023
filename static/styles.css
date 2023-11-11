@@ -13,26 +13,31 @@ body {
   color: white;
 }
 
-main {
-  padding: 15px;
+#dclist-container {
+  padding: 0 15px;
 }
 
-.dclink {
-  display: block;
-  color: black;
-  text-decoration: none;
-  padding: 10px 40px;
+#dclist {
+  width: 100%;
+  border-spacing: 0 15px;
+}
+
+.dcbar {
   background-color: #E5E7E6;
 }
 
-.dclink:not(:last-child) {
-  margin-bottom: 15px;
+.dcname {
+  padding: 10px 40px;
 }
 
-.dclink > h2 {
-  display: inline-block; 
+.dcbar:hover > .dcname {
+  text-decoration: underline;
 }
 
-.dclink:hover > h2 {
-  text-decoration-line: underline;
+.stars-large {
+  font-size: 20px;
+}
+
+.fa-star, .fa-star-half-o, .fa-star-o {
+  color: #FFBD00;
 }
