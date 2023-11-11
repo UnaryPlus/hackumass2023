@@ -3,3 +3,27 @@
 {% block title %}
   {{ dc | title }}
 {% endblock %}
+
+{% block main %}
+  <div id="commentlist">
+    {% for comment in comments %}
+      <div class="comment">
+        <div class="comment-left">
+          <div class="comment-user">
+            {{ comment["user"]["username"] }}
+          </div>
+          {{ comment["time"]["hour"] }}:{{ "%02d" % comment["time"]["minute"] }}
+        </div>
+        <div class="comment-right">
+          {% if comment["rating"] != None %}
+            {{ stars(comment["rating"], "stars-review") }}
+            <br>
+          {% endif %} 
+          {% if comment["text"] != None %}
+            {{ comment["text"] }}
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

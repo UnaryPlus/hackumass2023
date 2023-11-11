@@ -38,8 +38,36 @@ body {
   width: 200px;
 }
 
+#commentlist {
+  padding: 15px;
+}
+
+.comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.comment:not(:last-child) {
+  margin-bottom:15px;
+}
+
+.comment-left {
+  flex-basis: 200px;
+  text-align: center;
+}
+
+.comment-user {
+  font-size: 1.2em;
+}
+
 .stars-large {
-  font-size: 20px;
+  font-size: 1.25em;
+}
+
+.stars-review {
+  font-size: 1em;
 }
 
 .fa-star, .fa-star-half-o, .fa-star-o {

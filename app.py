@@ -25,25 +25,26 @@ def main_page():
 @app.route("/dc/<name>")
 def dc_page(name):
     users = db["users"]
-    comments = [
-        { "user": users.find_one({ "_id": doc["user_id"] }), "rating": doc["rating"], "text": doc["text"] }
-        for doc in db[name + "_comments"].find()
-    ]
+    comments = []
+    for doc in db[name + "_comments"].find():
+        doc["user"] = users.find_one({ "_id": doc["user_id"] })
+        comments.append(doc)
     return render_template("comments.html", dc=name, comments=comments)
 
 def comment(dc_name, user_id, rating, text):
     users_collection = db["users"]
     user_document = users_collection.find_one({"_id": user_id})
     
-    if rating is not None:
+    if rating != None:
         user_document["total_ratings"] = user_document.get("total_ratings", 0) + 1
-    if text is not None:
+    if text != None:
         user_document["total_comments"] = user_document.get("total_comments", 0) + 1
 
     users_collection.update_one({"_id": user_id}, {"$set": user_document})
 
-    current_time = datetime.now().strftime("%H:%M")
-    hour, minute = map(int, current_time.split(":"))
+    current_time = datetime.now()
+    hour = current_time.hour
+    minute = current_time.minute
 
     new_comment = {
         "user_id": user_id,
