@@ -9,29 +9,33 @@ body {
 
 #titlebar {
   padding: 10px 40px;
-  background-color: #881C1C;
+  background-color: #881c1c;
   color: white;
 }
 
-#dclist-container {
-  padding: 0 15px;
-}
-
 #dclist {
-  width: 100%;
-  border-spacing: 0 15px;
+  padding: 15px;
 }
 
 .dcbar {
-  background-color: #E5E7E6;
-}
-
-.dcname {
+  display: block;
+  color: black;
+  text-decoration: none;
+  background-color: #e5e7e6;
   padding: 10px 40px;
 }
 
-.dcbar:hover > .dcname {
-  text-decoration: underline;
+.dcbar:hover {
+  background-color: #d9dcda;
+}
+
+.dcbar:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.dcbar > h2 {
+  display: inline-block;
+  width: 200px;
 }
 
 .stars-large {
