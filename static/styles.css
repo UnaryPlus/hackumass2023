@@ -17,15 +17,22 @@ main {
   padding: 15px;
 }
 
-.dc {
+.dclink {
+  display: block;
+  color: black;
+  text-decoration: none;
   padding: 10px 40px;
   background-color: #E5E7E6;
 }
 
-.dc:not(:last-child) {
+.dclink:not(:last-child) {
   margin-bottom: 15px;
 }
 
-.dc > h2 {
+.dclink > h2 {
   display: inline-block; 
+}
+
+.dclink:hover > h2 {
+  text-decoration-line: underline;
 }

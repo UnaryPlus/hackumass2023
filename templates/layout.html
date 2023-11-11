@@ -1,6 +1,14 @@
+{% macro stars(x) %}
+  <span class="fa fa-star"></span>
+  {% for n in range(1, 5) %}
+    <span class="fa {% if x >= n + 0.75 %} fa-star {% elif x >= n + 0.25 %} fa-star-half-o {% else %} fa-star-o {% endif %}"></span>
+  {% endfor %}
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans">
   <link rel="stylesheet" href="/static/styles.css">
   <title>{% block title %}{% endblock %}</title>
