@@ -1,5 +1,5 @@
 {% macro stars(x, size) %}
-  <span class="{{ size }}">
+  <span class="stars {{ size }}">
     <span class="fa fa-star"></span>
     {% for n in range(1, 5) %}
       <span class="fa {% if x >= n + 0.75 %} fa-star {% elif x >= n + 0.25 %} fa-star-half-o {% else %} fa-star-o {% endif %}"></span>
