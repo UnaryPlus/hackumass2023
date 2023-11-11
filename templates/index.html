@@ -1,9 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-  HackUMass 2023
+  App Title
 {% endblock %}
 
 {% block main %}
-  main content goes here
+  {% for dc in dcs %}
+    <a class="dclink" href="/dc/{{ dc['name'] }}">
+      <h2>{{ dc["name"] | title }}</h2>
+      {{ stars(dc["avg_stars"]) }}
+    </a>
+  {% endfor %}
 {% endblock %}
