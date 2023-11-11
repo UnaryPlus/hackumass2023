@@ -23,7 +23,12 @@ def main_page():
 
 @app.route("/dc/<name>")
 def dc_page(name):
-    return render_template("dc.html")
+    users = db["users"]
+    comments = [
+        { "user": users.find_one({ "_id": doc["user_id"] }), "rating": doc["rating"], "text": doc["text"] }
+        for doc in db[name + "_comments"].find()
+    ]
+    return render_template("comments.html", dc=name, comments=comments)
 
 def comment(dc_name, user_id, rating, text):
     users_collection = db["users"]
