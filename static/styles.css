@@ -9,10 +9,23 @@ body {
 
 #titlebar {
   padding: 10px 40px;
-  background-color: #881c1c;
+  background-color: #881C1C;
   color: white;
 }
 
 main {
-  padding: 20px 40px;
+  padding: 15px;
+}
+
+.dc {
+  padding: 10px 40px;
+  background-color: #E5E7E6;
+}
+
+.dc:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.dc > h2 {
+  display: inline-block; 
 }
