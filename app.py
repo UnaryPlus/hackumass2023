@@ -26,9 +26,19 @@ def dc_page(name):
     return render_template("dc.html")
 
 def comment(dc_name, user_id, rating, text):
-    new_document = { "user_id": user_id, "rating": rating, "text": text }
-    collection = db[dc_name + "_comments"]
-    result = collection.insert_one(new_document)
+    users_collection = db["users"]
+    user_document = users_collection.find_one({"_id": user_id})
+    
+    if rating is not None:
+        user_document["total_ratings"] = user_document.get("total_ratings", 0) + 1
+    if text is not None:
+        user_document["total_comments"] = user_document.get("total_comments", 0) + 1
+
+    users_collection.update_one({"_id": user_id}, {"$set": user_document})
+
+    new_comment = {"user_id": user_id, "rating": rating, "text": text}
+    comments_collection = db[dc_name + "_comments"]
+    result = comments_collection.insert_one(new_comment)
 
 def new_user(username, email):
     new_document = {"username": username, "email": email, "total_ratings": 0, "total_comments": 0, "friends":[],"friend_requests":[]}
