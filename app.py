@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from pymongo import MongoClient
+from datetime import datetime
  
 app = Flask(__name__)
 
@@ -41,7 +42,18 @@ def comment(dc_name, user_id, rating, text):
 
     users_collection.update_one({"_id": user_id}, {"$set": user_document})
 
-    new_comment = {"user_id": user_id, "rating": rating, "text": text}
+    current_time = datetime.now().strftime("%H:%M")
+    hour, minute = map(int, current_time.split(":"))
+
+    new_comment = {
+        "user_id": user_id,
+        "rating": rating,
+        "text": text,
+        "time": {
+            "hour": hour,
+            "minute": minute
+        }
+    }
     comments_collection = db[dc_name + "_comments"]
     result = comments_collection.insert_one(new_comment)
 
