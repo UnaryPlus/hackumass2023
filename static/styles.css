@@ -1,0 +1,18 @@
+html, body {
+  margin: 0px;
+  height: 100%;
+}
+
+body {
+  font-family: "Noto Sans", sans-serif;
+}
+
+#titlebar {
+  padding: 10px 40px;
+  background-color: #881c1c;
+  color: white;
+}
+
+main {
+  padding: 20px 40px;
+}
