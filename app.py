@@ -64,4 +64,4 @@ def new_user(username, email):
     result = collection.insert_one(new_document)
 
 if __name__ == "__main__":
-    app.run(debug=True)   
+    app.run(debug=True)
