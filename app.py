@@ -25,5 +25,10 @@ def main_page():
 def dc_page(name):
     return render_template("dc.html")
 
+def comment(dc_name, user_id, rating, text):
+    new_document = { "user_id": user_id, "rating": rating, "text": text }
+    collection = db[dc_name + "_comments"]
+    result = collection.insert_one(new_document)
+
 if __name__ == "__main__":
     app.run(debug=True)   
