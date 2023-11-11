@@ -47,10 +47,7 @@ body {
   flex-direction: row;
   align-items: center;
   border: 1px solid black;
-}
-
-.comment:not(:last-child) {
-  margin-bottom:15px;
+  margin-bottom: 15px;
 }
 
 .comment-left {
