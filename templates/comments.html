@@ -10,6 +10,25 @@
 
 {% block main %}
   <div id="commentlist">
+    {% if logged_in %}
+      <form id="comment-form" action="/comment/{{ dc }}" method="POST">
+        <div>
+          <span class="star-input fa fa-star-o"></span>
+          <span class="star-input fa fa-star-o"></span>
+          <span class="star-input fa fa-star-o"></span>
+          <span class="star-input fa fa-star-o"></span>
+          <span class="star-input fa fa-star-o"></span>
+        </div>
+        <input hidden type="number" id="rating" name="rating" value="0">
+        <div>
+          <textarea name="text"></textarea>
+        </div>
+        <input type="submit" value="Comment">
+      </form>    
+    {% else %}
+      Log in to comment
+    {% endif %}
+
     {% for comment in comments %}
       <div class="comment">
         <div class="comment-left">
@@ -29,20 +48,6 @@
         </div>
       </div>
     {% endfor %}
-    <form id="comment-form" action="/comment/{{ dc }}" method="POST">
-      <div>
-        <span class="star-input fa fa-star-o"></span>
-        <span class="star-input fa fa-star-o"></span>
-        <span class="star-input fa fa-star-o"></span>
-        <span class="star-input fa fa-star-o"></span>
-        <span class="star-input fa fa-star-o"></span>
-      </div>
-      <input hidden type="number" id="rating" name="rating" value="0">
-      <div>
-        <textarea name="text"></textarea>
-      </div>
-      <input type="submit" value="Comment">
-    </form>
   </div>
 
   <script>
