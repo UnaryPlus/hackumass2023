@@ -23,7 +23,7 @@ oauth.register(
     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration'
 )
 
-client = MongoClient("mongodb+srv://team1:Y6IsKogedLQRMQD2@umassapp.amt2nke.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(env.get("MONGO_URI"))
 db = client["dining"]
 
 def average_stars(dc):
