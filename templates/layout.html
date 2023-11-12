@@ -15,8 +15,7 @@
   <link rel="stylesheet" href="/static/styles.css">
   <title>{% block title %}{% endblock %}</title>
 
-  <link rel="icon" href="media/favicon.ico" type="image/x-icon">
-
+  <link rel="icon" href="{{ url_for('static', filename='media/favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
   <div id="titlebar">
