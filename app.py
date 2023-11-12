@@ -53,9 +53,10 @@ def dc_page(dc_name):
 
 @app.route("/comment/<dc_name>", methods=["POST"])
 def comment_action(dc_name):
+    email = session.get("user")["email"]
     rating = int(request.form["rating"])
     if rating == 0: rating = None
-    comment(dc_name, 1, rating, request.form["text"])
+    comment(dc_name, email, rating, request.form["text"])
     return redirect('/dc/' + dc_name)
 
 @app.route("/login")
@@ -67,7 +68,7 @@ def login():
 @app.route("/callback", methods=["GET", "POST"])
 def callback():
     token = oauth.auth0.authorize_access_token()
-    username = token["userinfo"]["nickname"]
+    username = token["userinfo"]["nickname"] # fix this
     email = token["userinfo"]["name"]
 
     users = db["users"]
@@ -91,9 +92,10 @@ def logout():
         )
     )
 
-def comment(dc_name, user_id, rating, text):
+def comment(dc_name, email, rating, text):
     users_collection = db["users"]
-    user_document = users_collection.find_one({"_id": user_id})
+    user_document = users_collection.find_one({"email": email})
+    user_id = user_document["_id"]
     
     if rating != None:
         user_document["total_ratings"] = user_document.get("total_ratings", 0) + 1
