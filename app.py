@@ -60,11 +60,13 @@ def comment_action(dc_name):
     comment(dc_name, 1, rating, request.form["text"])
     return redirect('/dc/' + dc_name)
 
+"""
 @app.route("/register", methods=["POST"])
 def register_action():
     username = str(request.form["nickname"])
     email = str(request.form["name"])
     new_user(username, email)
+"""
 
 @app.route("/login")
 def login():
