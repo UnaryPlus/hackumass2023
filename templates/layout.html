@@ -18,7 +18,9 @@
 <body>
   <div id="titlebar">
     {% block titlebar %}{% endblock %}
-    <a href="/login">Log In</a>
+    {% if not logged_in %}
+      <a href="/login">Log In</a>
+    {% endif %}
   </div>
   {% block main %}{% endblock %}
 </div>

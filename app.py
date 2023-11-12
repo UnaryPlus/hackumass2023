@@ -52,7 +52,8 @@ def dc_page(dc_name):
     for doc in db[dc_name + "_comments"].find():
         doc["user"] = users.find_one({ "_id": doc["user_id"] })
         comments.append(doc)
-    return render_template("comments.html", dc=dc_name, comments=comments)
+    logged_in = True if session.get("user") != None else False
+    return render_template("comments.html", dc=dc_name, comments=comments, logged_in=logged_in)
 
 @app.route("/comment/<dc_name>", methods=["POST"])
 def comment_action(dc_name):
