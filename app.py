@@ -60,18 +60,10 @@ def comment_action(dc_name):
     comment(dc_name, 1, rating, request.form["text"])
     return redirect('/dc/' + dc_name)
 
-"""
-@app.route("/register", methods=["POST"])
-def register_action():
-    username = str(request.form["nickname"])
-    email = str(request.form["name"])
-    new_user(username, email)
-"""
-
 @app.route("/login")
 def login():
     return oauth.auth0.authorize_redirect(
-        redirect_uri=url_for("callback", _external=True)
+        redirect_uri=url_for("callback", _external=True)    
     )
 
 @app.route("/callback", methods=["GET", "POST"])
@@ -86,8 +78,7 @@ def logout():
     return redirect(
         "https://" + env.get("AUTH0_DOMAIN")
         + "/v2/logout?"
-        + urlencode(
-            {
+        + urlencode({
                 "returnTo": url_for("main_page", _external=True),
                 "client_id": env.get("AUTH0_CLIENT_ID"),
             },
