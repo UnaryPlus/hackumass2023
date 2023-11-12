@@ -5,6 +5,7 @@ from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
 from urllib.parse import quote_plus, urlencode
 from os import environ as env
+import pytz
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
@@ -103,7 +104,9 @@ def comment(dc_name, user_id, rating, text):
 
     users_collection.update_one({"_id": user_id}, {"$set": user_document})
 
-    current_time = datetime.now()
+    est_timezone = pytz.timezone("America/New_York")
+
+    current_time = datetime.now(est_timezone)
     hour = current_time.hour
     minute = current_time.minute
 
