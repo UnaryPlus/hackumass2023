@@ -42,7 +42,8 @@ def main_page():
         for name in [ "woo", "hamp", "berk", "frank" ]
     ]
     dcs.sort(key=lambda dc: -dc["avg_stars"])
-    return render_template("index.html", dcs=dcs)
+    logged_in = True if session.get("user") != None else False
+    return render_template("index.html", dcs=dcs, logged_in=logged_in)
 
 @app.route("/dc/<dc_name>")
 def dc_page(dc_name):
