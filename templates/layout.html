@@ -18,8 +18,10 @@
 <body>
   <div id="titlebar">
     {% block titlebar %}{% endblock %}
-    {% if not logged_in %}
-      <a href="/login">Log In</a>
+    {% if logged_in %}
+      <a href="/logout" class="titlebar-link titlebar-right">Log Out</a>
+    {% else %}
+      <a href="/login" class="titlebar-link titlebar-right">Log In</a>
     {% endif %}
   </div>
   {% block main %}{% endblock %}

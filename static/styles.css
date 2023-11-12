@@ -8,18 +8,25 @@ body {
 }
 
 #titlebar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   padding: 10px 40px;
   background-color: #881c1c;
   color: white;
 }
 
-.biglink {
+.titlebar-link {
   color: white;
   text-decoration: none;
 }
 
-.biglink:hover {
+.titlebar-link:hover {
   text-decoration: underline;
+}
+
+.titlebar-right {
+  margin-left: auto;
 }
 
 .separator {
