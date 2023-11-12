@@ -18,10 +18,11 @@
 <body>
   <div id="titlebar">
     {% block titlebar %}{% endblock %}
-    {% if logged_in %}
-      <a href="/logout" class="titlebar-link titlebar-right">Log Out</a>
-    {% else %}
+    {% if user == None %}
       <a href="/login" class="titlebar-link titlebar-right">Log In</a>
+    {% else %}
+      <span class="titlebar-right">{{ user["username"] }}</span>
+      <a href="/logout" class="titlebar-link titlebar-right">Log Out</a>      
     {% endif %}
   </div>
   {% block main %}{% endblock %}

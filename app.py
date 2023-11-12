@@ -39,8 +39,7 @@ def main_page():
         for name in [ "woo", "hamp", "berk", "frank" ]
     ]
     dcs.sort(key=lambda dc: -dc["avg_stars"])
-    logged_in = True if session.get("user") != None else False
-    return render_template("index.html", dcs=dcs, logged_in=logged_in)
+    return render_template("index.html", dcs=dcs, user=session.get("user"))
 
 @app.route("/dc/<dc_name>")
 def dc_page(dc_name):
@@ -50,8 +49,7 @@ def dc_page(dc_name):
         doc["user"] = users.find_one({ "_id": doc["user_id"] })
         comments.append(doc)
     comments.reverse()
-    logged_in = True if session.get("user") != None else False
-    return render_template("comments.html", dc=dc_name, comments=comments, logged_in=logged_in)
+    return render_template("comments.html", dc=dc_name, comments=comments, user=session.get("user"))
 
 @app.route("/comment/<dc_name>", methods=["POST"])
 def comment_action(dc_name):
@@ -69,7 +67,14 @@ def login():
 @app.route("/callback", methods=["GET", "POST"])
 def callback():
     token = oauth.auth0.authorize_access_token()
-    session["user"] = token
+    username = token["userinfo"]["nickname"]
+    email = token["userinfo"]["name"]
+
+    users = db["users"]
+    user = users.find_one({ "email": email })
+    if user == None:
+        new_user(username, email)
+    session["user"] = { "username": username, "email": email }
     return redirect("/")
 
 @app.route("/logout")
