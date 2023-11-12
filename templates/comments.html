@@ -4,6 +4,10 @@
   {{ dc | title }}
 {% endblock %}
 
+{% block titlebar %}
+  <h1><a class="biglink" href="/">App Title</a><span class="separator">/</span>{{ dc | title }}</h1>
+{% endblock %}
+
 {% block main %}
   <div id="commentlist">
     {% for comment in comments %}
