@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request
 from pymongo import MongoClient
 from datetime import datetime
  
@@ -22,14 +22,21 @@ def main_page():
     dcs.sort(key=lambda dc: -dc["avg_stars"])
     return render_template("index.html", dcs=dcs)
 
-@app.route("/dc/<name>")
-def dc_page(name):
+@app.route("/dc/<dc_name>")
+def dc_page(dc_name):
     users = db["users"]
     comments = []
-    for doc in db[name + "_comments"].find():
+    for doc in db[dc_name + "_comments"].find():
         doc["user"] = users.find_one({ "_id": doc["user_id"] })
         comments.append(doc)
-    return render_template("comments.html", dc=name, comments=comments)
+    return render_template("comments.html", dc=dc_name, comments=comments)
+
+@app.route("/comment/<dc_name>", methods=["POST"])
+def comment_action(dc_name):
+    rating = int(request.form["rating"])
+    if rating == 0: rating = None
+    comment(dc_name, 1, rating, request.form["text"])
+    return redirect('/dc/' + dc_name)
 
 def comment(dc_name, user_id, rating, text):
     users_collection = db["users"]

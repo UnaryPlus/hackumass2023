@@ -25,5 +25,34 @@
         </div>
       </div>
     {% endfor %}
+    <form id="comment-form" action="/comment/{{ dc }}" method="POST">
+      <div>
+        <span class="star-input fa fa-star-o"></span>
+        <span class="star-input fa fa-star-o"></span>
+        <span class="star-input fa fa-star-o"></span>
+        <span class="star-input fa fa-star-o"></span>
+        <span class="star-input fa fa-star-o"></span>
+      </div>
+      <input hidden type="number" id="rating" name="rating" value="0">
+      <div>
+        <textarea name="text"></textarea>
+      </div>
+      <input type="submit" value="Comment">
+    </form>
   </div>
+
+  <script>
+    starInputs = document.querySelectorAll(".star-input");
+    rating = document.querySelector("#rating");
+
+    starInputs.forEach((star, i) => {
+      star.addEventListener("click", () => {
+        rating.value = i + 1;
+        starInputs.forEach((otherStar, j) => {
+          otherStar.classList.remove("fa-star", "fa-star-o");
+          otherStar.classList.add(j <= i ? "fa-star" : "fa-star-o");
+        });
+      });
+    });
+  </script>
 {% endblock %}
