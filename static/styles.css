@@ -67,7 +67,7 @@ body {
   flex-direction: row;
   align-items: center;
   border: 1px solid black;
-  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .comment-left {
