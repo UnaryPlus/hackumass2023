@@ -38,6 +38,12 @@ def comment_action(dc_name):
     comment(dc_name, 1, rating, request.form["text"])
     return redirect('/dc/' + dc_name)
 
+@app.route("/register", methods=["POST"])
+def register_action():
+    username = str(request.form["nickname"])
+    email = str(request.form["name"])
+    new_user(username, email)
+
 def comment(dc_name, user_id, rating, text):
     users_collection = db["users"]
     user_document = users_collection.find_one({"_id": user_id})
